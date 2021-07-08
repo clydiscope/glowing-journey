@@ -6,6 +6,9 @@ import Loading from './LoadingComponent'
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 
+import * as Animatable from 'react-native-animatable';
+
+
 const mapStateToProps = state => {
     return {
         campsites: state.campsites,
@@ -24,13 +27,15 @@ class Directory extends Component {
         const { navigate } = this.props.navigation;
         const renderDirectoryItem = ({item}) => {
             return (
-                <Tile
-                    title={item.name}
-                    subtitle={item.description}
-                    featured
-                    onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
-                    imageSrc={{ uri: baseUrl + item.image }}
-                />
+                <Animatable.View animation='fadeInUp' duration={2000}> 
+                    <Tile
+                        title={item.name}
+                        subtitle={item.description}
+                        featured
+                        onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
+                        imageSrc={{ uri: baseUrl + item.image }}
+                    />
+                </Animatable.View>
             );
         };
         if(this.props.campsites.isLoading) {
