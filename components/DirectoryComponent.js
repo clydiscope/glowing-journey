@@ -30,7 +30,7 @@ class Directory extends Component {
                 <Animatable.View animation='fadeInUp' duration={2000}> 
                     <Tile
                         title={item.name}
-                        subtitle={item.description}
+                        caption={item.description}
                         featured
                         onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
                         imageSrc={{ uri: baseUrl + item.image }}
