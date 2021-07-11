@@ -54,7 +54,8 @@ function RenderCampsite(props) {
 
     const view = React.createRef();
 
-    const recognizerDrag = ({dx}) => (dx < -200) ? true : false;
+    const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
+    const recognizeComment = ({dx}) => (dx > 200) ? true : false;
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () =>  true,
@@ -64,7 +65,7 @@ function RenderCampsite(props) {
         },
         onPanResponderEnd: (e, gestureState) => {
             console.log('pan responder end', gestureState);
-            if (recognizerDrag(gestureState)) {
+            if (recognizeDrag(gestureState)) {
                 Alert.alert(
                     'Add Favorite',
                     'Are you sure you wish to add ' + campsite.name + 'to favorite?',
@@ -82,6 +83,9 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 );
+            } else if (recognizeComment(gestureState)) {
+                console.log('you swipped right!');
+                props.onShowModal();
             }
             return true;
         }
